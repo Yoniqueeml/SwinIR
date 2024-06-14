@@ -1,7 +1,25 @@
-# SwinIR: Image Restoration Using Swin Transformer
-[Jingyun Liang](https://jingyunliang.github.io), [Jiezhang Cao](https://www.jiezhangcao.com/), [Guolei Sun](https://vision.ee.ethz.ch/people-details.MjYzMjMw.TGlzdC8zMjg5LC0xOTcxNDY1MTc4.html), [Kai Zhang](https://cszn.github.io/), [Luc Van Gool](https://scholar.google.com/citations?user=TwMib_QAAAAJ&hl=en), [Radu Timofte](http://people.ee.ethz.ch/~timofter/)
+# Установка
+git clone https://github.com/JingyunLiang/SwinIR.git
+conda create -n swinir python=3.8
+conda activate swinir
+pip install -r requirements.txt
 
-Computer Vision Lab, ETH Zurich
+# Тестирование (находясь в папке SwinIr)
+python main_test_swinir.py --task classical_sr --scale 2 --training_patch_size 48 --model_path model_zoo/swinir/001_classicalSR_DIV2K_s48w8_SwinIR-M_x2.pth --folder_lq testsets/Set5/LR_bicubic/X2 --folder_gt testsets/Set5/HR
+
+# Запуск на своих изображениях (средний размер модели)
+python main_test_swinir.py --task real_sr --scale 4 --model_path model_zoo/swinir/003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.pth --folder_lq testsets/office/HR --tile 400
+
+где folder_lq - путь к папке с изображениями
+model_path - путь к модели
+“–tile 400” используется при нехватке памяти (необязательный аргумент)
+
+# Запуск на своих изображениях (большая модель)
+python main_test_swinir.py --task real_sr --scale 4 --large_model --model_path model_zoo/swinir/003_realSR_BSRGAN_DFOWMFC_s64w8_SwinIR-L_x4_GAN.pth --folder_lq testsets/office/HR --tile 400
+
+где folder_lq - путь к папке с изображениями
+model_path - путь к модели
+“–tile 400” используется при нехватке памяти (необязательный аргумент)
 
 ---
 
